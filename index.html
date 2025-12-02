@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Commons - Free, Open-Source Web Tools</title>
+    <meta name="description" content="A commons for free, open-source, single-purpose web tools. No login required. No tracking. No ads.">
+    <link rel="canonical" href="https://toolcommons.org">
+    <style>
+        :root {
+            --bg-primary: #fafafa;
+            --bg-secondary: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --border: #e5e5e5;
+            --success: #16a34a;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0a0a0a;
+                --bg-secondary: #171717;
+                --text-primary: #fafafa;
+                --text-secondary: #a3a3a3;
+                --accent: #3b82f6;
+                --accent-hover: #60a5fa;
+                --border: #262626;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 24px;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Principles */
+        .principles {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .principle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+        }
+
+        .principle .check {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Tools Grid */
+        .tools-section {
+            padding: 60px 0;
+        }
+
+        .tools-section h2 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .tools-section .section-subtitle {
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .tool-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .tool-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .tool-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+
+        .tool-card h3 a {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .tool-card h3 a:hover {
+            color: var(--accent);
+        }
+
+        .tool-card .description {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .tool-card .meta {
+            display: flex;
+            gap: 16px;
+            font-size: 0.875rem;
+        }
+
+        .tool-card .meta a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .tool-card .meta a:hover {
+            text-decoration: underline;
+        }
+
+        .tool-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            padding: 4px 10px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* Mission Section */
+        .mission {
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .mission h2 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .mission-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .mission-content p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        .criteria-list {
+            list-style: none;
+            margin: 24px 0;
+        }
+
+        .criteria-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .criteria-list li:last-child {
+            border-bottom: none;
+        }
+
+        .criteria-list .check {
+            color: var(--success);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Submit Section */
+        .submit-section {
+            padding: 60px 0;
+            background: var(--bg-secondary);
+            text-align: center;
+        }
+
+        .submit-section h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .submit-section p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--accent-hover);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer p {
+            margin-bottom: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .principles {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            header .container {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            nav a {
+                margin-left: 16px;
+            }
+
+            nav a:first-child {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="logo">Tool<span>Commons</span></a>
+            <nav>
+                <a href="#tools">Tools</a>
+                <a href="#mission">Mission</a>
+                <a href="#submit">Submit</a>
+                <a href="https://github.com/ToolCommons">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Free tools for everyone</h1>
+                <p class="subtitle">
+                    A commons for open-source, single-purpose web tools.
+                    Built by individuals. Free forever.
+                </p>
+                <div class="principles">
+                    <div class="principle">
+                        <span class="check">&#10003;</span>
+                        <span>No login required</span>
+                    </div>
+                    <div class="principle">
+                        <span class="check">&#10003;</span>
+                        <span>No tracking</span>
+                    </div>
+                    <div class="principle">
+                        <span class="check">&#10003;</span>
+                        <span>No ads</span>
+                    </div>
+                    <div class="principle">
+                        <span class="check">&#10003;</span>
+                        <span>Open source</span>
+                    </div>
+                    <div class="principle">
+                        <span class="check">&#10003;</span>
+                        <span>Local-first</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tools-section" id="tools">
+            <div class="container">
+                <h2>Tools</h2>
+                <p class="section-subtitle">Quality tools that respect your privacy and just work.</p>
+
+                <div class="tools-grid">
+                    <article class="tool-card">
+                        <h3><a href="https://merview.com" target="_blank" rel="noopener">Merview</a></h3>
+                        <p class="description">
+                            Markdown editor with live preview and Mermaid diagram support.
+                            Drag and drop files, export to PDF, 37 themes.
+                        </p>
+                        <div class="meta">
+                            <a href="https://merview.com" target="_blank" rel="noopener">Use it</a>
+                            <a href="https://github.com/mickdarling/merview" target="_blank" rel="noopener">Source</a>
+                            <span>by <a href="https://github.com/mickdarling" target="_blank" rel="noopener">mickdarling</a></span>
+                        </div>
+                        <div class="tool-tags">
+                            <span class="tag">markdown</span>
+                            <span class="tag">mermaid</span>
+                            <span class="tag">diagrams</span>
+                            <span class="tag">editor</span>
+                        </div>
+                    </article>
+
+                    <!-- More tools will be added here -->
+                </div>
+            </div>
+        </section>
+
+        <section class="mission" id="mission">
+            <div class="container">
+                <h2>Mission</h2>
+                <div class="mission-content">
+                    <p>
+                        The web is full of simple tasks that should be simple to do.
+                        Convert a file. Preview a document. Generate a QR code.
+                        Instead, we're asked to create accounts, accept tracking, watch ads,
+                        or pay subscriptions for things that should be free.
+                    </p>
+                    <p>
+                        Tool Commons is a directory of tools built differently.
+                        Each tool does one thing well. Each is open source.
+                        Each runs in your browser without sending your data anywhere.
+                        Each is built by an individual developer who wanted the tool to exist.
+                    </p>
+                    <p>
+                        <strong>To be listed here, a tool must meet these criteria:</strong>
+                    </p>
+                    <ul class="criteria-list">
+                        <li>
+                            <span class="check">&#10003;</span>
+                            <span><strong>Open source</strong> &mdash; Code is public under an OSI-approved license</span>
+                        </li>
+                        <li>
+                            <span class="check">&#10003;</span>
+                            <span><strong>No login required</strong> &mdash; Core functionality works without creating an account</span>
+                        </li>
+                        <li>
+                            <span class="check">&#10003;</span>
+                            <span><strong>Local-first</strong> &mdash; Your data stays in your browser unless you explicitly export it</span>
+                        </li>
+                        <li>
+                            <span class="check">&#10003;</span>
+                            <span><strong>No ads, no tracking</strong> &mdash; Privacy-respecting analytics only (aggregate, anonymous)</span>
+                        </li>
+                        <li>
+                            <span class="check">&#10003;</span>
+                            <span><strong>Static hostable</strong> &mdash; Can run from GitHub Pages or similar free hosting</span>
+                        </li>
+                        <li>
+                            <span class="check">&#10003;</span>
+                            <span><strong>Single purpose</strong> &mdash; Does one thing well rather than everything poorly</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="submit-section" id="submit">
+            <div class="container">
+                <h2>Submit a tool</h2>
+                <p>Built something that meets the criteria? We'd love to list it.</p>
+                <a href="https://github.com/ToolCommons/toolcommons.github.io/issues/new?template=submit-tool.md" class="btn">
+                    Submit via GitHub
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                Tool Commons is itself open source.
+                <a href="https://github.com/ToolCommons">View on GitHub</a>
+            </p>
+            <p>
+                No tracking. No cookies. Just tools.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
